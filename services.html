@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="jec.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Jecfam services</title>
+    <!-- Your product content goes here -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+      <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="loader"></div>
+
+<div class="topnav" id="myTopnav">
+    <a href="home.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="products.html">Products</a>
+    <a href="contact.html">Contact</a>
+    <a href="signup2.html"><img src="userr.png" style="width: 30px; height: auto;">
+    </a>
+    
+    
+</div>
+     <script>
+        // Simulate loading with a progress bar
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        const content = document.querySelector('.content');
+
+        const interval = setInterval(() => {
+            if (progress < 100) {
+                progress += 10; // Increment progress
+                progressBar.style.width = progress + '%'; // Update progress bar width
+            } else {
+                clearInterval(interval); // Stop the interval
+                setTimeout(() => {
+                    progressBar.parentElement.style.display = 'none'; // Hide progress bar
+                    content.style.display = 'block'; // Show content
+                    mainContent.style.display = 'block';
+                }, 500); // Short delay before showing content
+            }
+        }, 300); // Adjust loading speed (300ms per increment)
+    </script>
+    <style>
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin: 20px;
+            
+            background-size: cover;
+            background-image: url('https://t3.ftcdn.net/jpg/05/19/73/36/360_F_519733648_tSMSHwqxw3TrbgFSXNKJVKncdkC0siTq.jpg')
+        
+        }
+        .topnav {
+    display: flex;
+    align-items: center;
+    overflow: show;
+    padding: 15px;
+    justify-content: center;
+}
+        .service-container {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 50px;
+        }
+        .topnav a:hover {
+            color: #f39c12;
+        }
+        h2 {
+            color: white;
+        }
+        h1 {
+            color: white;
+            margin-top: -20px;
+        }
+        p {
+            color: white;
+        }
+        div a {
+            padding: 15%;
+        }
+        .topnav a {
+    float: left;
+    display: block;
+    color: #f5f4ee;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+    font-weight: 900;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.content {
+            display: none; /* Hidden until loaded */
+            text-align: center;
+        }
+        .progress-container {
+            width: 100%;
+            height: 7px;
+            background-color: #e0e0e0;
+            border-radius: 45px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #3498db; /* Blue */
+            width: 0; /* Initial width */
+            transition: width 0.9s; /* Smooth transition */
+        }
+        .content {
+            display: table-row-group; /* Hidden until loaded */
+            text-align: center;
+        }
+    </style>
+    <script>
+        // Simulate content loading
+        window.onload = function() {
+            const loader = document.querySelector('.loader');
+            const content = document.querySelector('.content');
+    
+            // Simulate loading delay
+            setTimeout(() => {
+                loader.style.display = 'none'; // Hide loader
+                content.style.display = 'block'; // Show content
+                mainContent.style.display = 'block';
+            }, 2000); // Change delay as needed (2000ms = 2 seconds)
+        };
+    </script>
+    <body>
+       
+<style>
+    a {
+            color: #e3e8ee;
+            text-decoration: none;
+        }
+</style>
+    </body>
+</head>
+<body>
+
+<div class="service-container">
+    <h1>JECFAM SERVICES</h1>
+
+    <div class="service">
+        <h2>Diagnostic Services</h2>
+        <p>
+            We identify and troubleshoot hardware and software issues in phones and laptops.
+            Our team of experienced engineers ensures that your devices are well attended to
+            and we mostly receive positive feedback.
+        </p>
+    </div>
+
+    <div class="service">
+        <h2>Screen replacement</h2>
+        <p>
+            Our team is fully trained on screen replacement for both mobile phones and laptops.
+            We replace best quality screen LCD for customer betterment.
+            Choose JECFAM TECH for quality services.
+        </p>
+    </div>
+
+    <div class="service">
+        <h2>Software troubleshooting</h2>
+        <p>
+            Resolve software-related problems, including operating system issues,
+            driver conflicts, and malware removal.
+        </p>
+    </div>
+    <div class="service">
+        <h2>Data recovery</h2>
+        <p>
+            Retrieve data from damaged or corrupted devices, offering solutions for 
+            lost files, photos, and documents driver conflicts, and malware removal.
+        </p>
+</div>
+<div class="service">
+    <h2>Upgrades</h2>
+    <p>
+        We Upgrade hardware components, such as RAM and storage, to improve device performance.
+    </p>
+</div>
+<div class="service">
+    <h2>Data recovery</h2>
+    <p>
+ `      Retrieve data from damaged or corrupted devices, offering solutions for 
+        lost files, photos, and documents driver conflicts, and malware removal.
+    </p>
+</div>
+<div class="service">
+    <h2>Water damage & repair spillage</h2>
+    <p>
+        Assess and repair devices affected by water or liquid damage.
+    </p>
+</div>
+<div class="service">
+    <h2>Customization services</h2>
+    <p>
+    Offer customization options, such as installing custom ROMs, to enhance device functionality.
+    </p>
+</div>
+<div class="service">
+    <h2>Warranty services</h2>
+    <p>
+        Provide warranty support for repairs, ensuring customer satisfaction and confidence in 
+        your services.
+    </p>
+</div>
+
+</body>
+</html>

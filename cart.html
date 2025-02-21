@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .cart-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .order-button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .order-button:hover {
+      background-color: #0946ee;
+    }
+
+    .empty-cart {
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <a href="products.html" class="back-to-products"><center><strong>← Back to Products</strong></center></a>
+
+    <h1>Your Cart</h1>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price (Ksh)</th>
+          <th>Quantity</th>
+          <th>Subtotal (Ksh)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items">
+        <!-- Items will be populated here dynamically -->
+      </tbody>
+    </table>
+    <p class="total" id="total-price">Total: Ksh 0</p>
+    <a href="https://wa.me/+254743896973" class="order-button" id="order-now">Order Now</a>
+  </div>
+
+  <script>
+    // Load Cart and Populate Table
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsContainer = document.getElementById('cart-items');
+      const totalPriceElement = document.getElementById('total-price');
+      let totalPrice = 0;
+
+      // Clear table before adding new items
+      cartItemsContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<tr><td colspan="5" class="empty-cart">Your cart is empty!</td></tr>';
+        return;
+      }
+
+      // Loop through cart items and populate rows
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.quantity;
+        totalPrice += subtotal;
+
+        const row = `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+            <td>
+              <button onclick="updateQuantity(${index}, -1)">-</button>
+              ${item.quantity}
+              <button onclick="updateQuantity(${index}, 1)">+</button>
+            </td>
+            <td>${subtotal}</td>
+            <td><button onclick="removeItem(${index})">Remove</button></td>
+          </tr>
+        `;
+        cartItemsContainer.insertAdjacentHTML('beforeend', row);
+      });
+
+      totalPriceElement.textContent = `Total: Ksh ${totalPrice}`;
+
+      // Update "Order Now" button link
+      const orderNowButton = document.getElementById('order-now');
+      const encodedCart = encodeURIComponent(JSON.stringify(cart));
+      orderNowButton.href = `https://wa.me/254743896973?text=Hello%20JECFAM%20TECH%20SOLUTIONS,%20Help%20me%20process%20the%20following:%0A${encodedCart}%0ATotal:%20Ksh%20${totalPrice}`;
+    }
+
+    // Update Quantity
+    function updateQuantity(index, change) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart[index]) {
+        cart[index].quantity += change;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1); // Remove item if quantity is 0
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart(); // Reload cart
+      }
+    }
+
+    // Remove Item
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart(); // Reload cart
+    }
+
+    // Load cart on page load
+    loadCart();
+  </script>
+   <script>
+    // Function to check if user is logged in
+    function checkLoginStatus() {
+        return localStorage.getItem("isLoggedIn") === "true";
+    }
+
+    // Redirect to login/signup page if user is not logged in
+    document.getElementById("order-now-btn").addEventListener("click", function() {
+        if (!checkLoginStatus()) {
+            window.location.href = "signuplogin.html";  // Redirect to signup/login page
+        } else {
+            // Proceed with WhatsApp redirection or other order logic
+            window.location.href = "https://wa.me/1234567890?text=I%20want%20to%20order%20some%20items"; // Replace with your WhatsApp number and message
+        }
+    });
+</script>
+  
+</body>
+</html>
