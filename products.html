@@ -19,45 +19,7 @@ function openCart() {
   window.location.href = "cart.html"; // Redirect to the cart page
 }
     </script>
-        <script>
-    // URL to your get-products.php script on InfinityFree
-    const apiUrl = "https://mojehadmin.wuaze.com/get-products.php"; // Replace with your actual URL
-
-    // Fetch products from the backend
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(products => {
-            const productListElement = document.getElementById('product-list'); // Assuming this is your product container
-
-            // Loop through each product and display it
-            products.forEach(product => {
-                const productItem = document.createElement('div');
-                productItem.className = 'product-item'; // You can adjust the class names to fit your design
-
-                // Display product details
-                productItem.innerHTML = `
-                    <h3>${product.name}</h3>
-                    <p>Price: KSH ${product.price}</p>
-                    <p>${product.description}</p>
-                    <button onclick="addToCart(${product.id})">Add to Cart</button>
-                `;
-
-                productListElement.appendChild(productItem);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-        });
-
-    // Sample function to add a product to the cart (basic localStorage implementation)
-    function addToCart(productId) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(productId);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert('Product added to cart!');
-    }
-</script>
-
+        
   </header>
 </head>
 <style>
@@ -582,6 +544,7 @@ h5 {
           <button onclick="addToCart('HP Pavilion Aero 13 AMD Ryzen', 59599)">Add to Cart</button>
       </div>  
   </main>
+    <div id="product-list"></div>
   <footer>
     <p><center>JECFAM TECH SOLUTIONS</center></p>
   </footer>
@@ -691,6 +654,18 @@ window.onload = function() {
   updateCartCount();
 };
 </script>
+    <script>
+  fetch("http://mojehadmin.wuaze.com/get-products.php")
+    .then(response => response.text())
+    .then(html => {
+      const container = document.getElementById("product-list");
+      container.innerHTML = html;
+    })
+    .catch(error => {
+      console.error("Error loading products:", error);
+    });
+</script>
+
 </body>
 
 
