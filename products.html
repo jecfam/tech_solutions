@@ -1,364 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="icon" href="jec.ico" type="image/x-icon">
- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>Jecfam products</title>
-    <div style="position: relative;">
-        <img src="shopping-bag.png" alt="Cart" class="cart-image" onclick="openCart()">
-        <span id="cart-counter" class="cart-counter">0</span>
-      </div>
-    <body>
-  <script>
-        // Function to open the cart page
-function openCart() {
-  window.location.href = "cart.html"; // Redirect to the cart page
-}
-    </script>
-        <body>
-    <div id="product-list" class="product-list">
-        <!-- Products will be displayed here -->
-    </div>
-
-    <script>
-        // Fetch products from InfinityFree hosted get_products.php
-        fetch('https://mojehadmin.wuaze.com/get_products.php')
-            .then(response => response.json())  // Parse the JSON response
-            .then(data => {
-                const productList = document.getElementById('product-list');
-
-                // Loop through products and display them
-                data.forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.classList.add('product');
-
-                    productDiv.innerHTML = `
-                        <img src="https://mojehadmin.wuaze.com/uploads/${product.image}" alt="${product.name}">
-                        <h4>${product.name}</h4>
-                        <h5>${product.description}</h5>
-                        <h4>Price: Kshs ${product.price}</h4>
-                        <div class="star-rating">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                        </div>
-                        <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
-                    `;
-
-                    productList.appendChild(productDiv);
-                });
-            })
-            .catch(error => console.error('Error fetching products:', error));
-    </script>
-<style>
-body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: white;
-  background-size: cover;
-  border-radius: 50px;
-}
-.fa {
-  color: #f39c12;
-}
-.container {
-  width: 100%;
-  margin: 10px;
-  border-radius: 50px;
-}
-h4 {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-style: normal;
-}
-header {
-  background-image: none;
-  padding: -5px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
-.cart-image {
-    position: fixed;
-            top: 11px; /* Adjust the top position as needed */
-            padding: none;
-            right: 5px; /* Adjust the left position as needed */
-            width: 40px; /* Adjust the width as needed */
-            height: auto;
-            cursor: pointer;
-            border-radius: 100px;
-            background-color: rgba(128, 128, 128, 0);
-            
-}
-.cart-counter {
-  
-            position: fixed;
-            top: 1px;
-            right: 5px;
-            background-color: rgba(128, 128, 128, 0);
-            color: rgb(228, 25, 25);
-            border-radius: 100%;
-            padding: 5px 10px;
-            font-size: 10px;
-            width: 1px;
-            
-}
-header h1 {
-  margin: 0;
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-nav {
-    display: flex;
-    align-items: center;
-    overflow: show;
-    padding: 15px;
-    justify-content: center;
-}
-.topnav {
-    display: flex;
-    align-items: center;
-    overflow: show;
-    padding: 15px;
-    justify-content: center;
-}
-.topnav a {
-    float: left;
-    display: block;
-    color: #38361f;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 16px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
-    font-weight: 900;
-}
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-.product {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center; /* Center-align content */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  justify-content: space-between; /* Distribute items evenly */
-  height: 90%; /* Make all product cards the same height */
-  
-}
-.product h4 {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-  color: #333;
-}
-.product h4, .product p {
-  margin: 5px 0; /* Consistent spacing between elements */
-}
-.product img:hover {
-    transform: scale(1.1);
-}
-
-.product img {
-  width: 100%; /* Keep full width for uniformity */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 5px;
-  margin-bottom: 10px;
-  transition: transform 0.9s, box-shadow 0.9s;
-}
-
-
-.product h3 {
-  margin: 10px 0; /* Add margin above and below the product name */
-}
-
-.product p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limit to 3 lines */
-  -webkit-box-orient: vertical;
-  font-size: 15px;
-}
-.image-container img:last-child {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #a32d2d; /* Accent color for price */
-}
-.highlight {
-  background-color: yellow;
-  font-weight: bold;
-  color: red;
-}
-.product button {
-  margin-top: 10px; /* Add space above the button */
-  padding: 10px 15px; /* Add padding for better usability */
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem; /* Adjust button text size */
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.product button:hover {
-  background-color: #232050; /* Darker blue on hover */
-}
-.star-rating {
-  margin: 10px 0; /* Add spacing around the stars */
-  display: flex;
-  justify-content: center; /* Center-align the stars */
-}
-
-.star {
-  font-size: 20px; /* Adjust star size */
-  color: gray; /* Color for empty stars */
-  margin: 0 2px; /* Spacing between stars */
-  cursor: pointer; /* Pointer cursor for interactivity */
-}
-
-.star.filled {
-  color: gold; /* Color for filled stars */
-}
-.topnav a:hover {
-            color: #f39c12;
-        }
-h5 {
-  font-size: 15px;
-  font-weight: 100;
-}
-</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="icon" href="jec.ico" type="image/x-icon" />
+  <title>Jecfam products</title>
+  <style>
+    /* [YOUR CSS STYLES - UNCHANGED] */
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      background-size: cover;
+      border-radius: 50px;
+    }
+    .fa { color: #f39c12; }
+    .container { width: 100%; margin: 10px; border-radius: 50px; }
+    h4 { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: normal; }
+    header { background-image: none; padding: -5px; font-family: Georgia, 'Times New Roman', Times, serif; }
+    .cart-image {
+      position: fixed;
+      top: 11px;
+      right: 5px;
+      width: 40px;
+      height: auto;
+      cursor: pointer;
+      border-radius: 100px;
+      background-color: rgba(128, 128, 128, 0);
+    }
+    .cart-counter {
+      position: fixed;
+      top: 1px;
+      right: 5px;
+      background-color: rgba(128, 128, 128, 0);
+      color: rgb(228, 25, 25);
+      border-radius: 100%;
+      padding: 5px 10px;
+      font-size: 10px;
+      width: 1px;
+    }
+    header h1 {
+      margin: 0;
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    nav, .topnav {
+      display: flex;
+      align-items: center;
+      overflow: show;
+      padding: 15px;
+      justify-content: center;
+    }
+    .topnav a {
+      float: left;
+      display: block;
+      color: #38361f;
+      text-align: center;
+      padding: 10px;
+      text-decoration: none;
+      font-size: 16px;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-weight: 900;
+    }
+    .topnav a:hover { color: #f39c12; }
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 90%;
+    }
+    .product h4 { font-size: 1.2rem; margin-bottom: 5px; color: #333; }
+    .product h4, .product p { margin: 5px 0; }
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: transform 0.9s, box-shadow 0.9s;
+    }
+    .product img:hover { transform: scale(1.1); }
+    .product p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      font-size: 15px;
+    }
+    .highlight { background-color: yellow; font-weight: bold; color: red; }
+    .product button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .product button:hover { background-color: #232050; }
+    .star-rating {
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .star {
+      font-size: 20px;
+      color: gray;
+      margin: 0 2px;
+      cursor: pointer;
+    }
+    .star.filled { color: gold; }
+    h5 { font-size: 15px; font-weight: 100; }
+  </style>
+</head>
 <body>
-  <header>  
-      <div class="topnav" id="myTopnav">
-        <a href="home.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="products.html">Products</a>
-        <a href="contact.html">Contact</a>
-        <a href="signup2.html"><img src="user.png" style="width: 30px; height: auto;">
-        </a>
+  <div style="position: relative;">
+    <img src="shopping-bag.png" alt="Cart" class="cart-image" onclick="openCart()" />
+    <span id="cart-counter" class="cart-counter">0</span>
+  </div>
+
+  <header>
+    <div class="topnav" id="myTopnav">
+      <a href="home.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a href="signup2.html"><img src="user.png" style="width: 30px; height: auto;"></a>
     </div>
-     
   </header>
-  
+
+  <div id="product-list" class="product-list"></div>
+
   <footer>
     <p><center>JECFAM TECH SOLUTIONS</center></p>
   </footer>
+
   <script>
-    // Add click event listeners to the stars
+    function openCart() {
+      window.location.href = "cart.html";
+    }
+
+    fetch('https://mojehadmin.wuaze.com/get_products.php')
+      .then(response => response.json())
+      .then(data => {
+        const productList = document.getElementById('product-list');
+        data.forEach(product => {
+          const productDiv = document.createElement('div');
+          productDiv.classList.add('product');
+          productDiv.innerHTML = `
+            <img src="https://mojehadmin.wuaze.com/uploads/${product.image}" alt="${product.name}">
+            <h4>${product.name}</h4>
+            <h5>${product.description}</h5>
+            <h4>Price: Kshs ${product.price}</h4>
+            <div class="star-rating">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+          `;
+          productList.appendChild(productDiv);
+        });
+      })
+      .catch(error => console.error('Error fetching products:', error));
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-counter').textContent = cartCount > 0 ? cartCount : '';
+    }
+
+    function addToCart(name, price) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItemIndex = cart.findIndex(item => item.name === name);
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    window.onload = function() {
+      updateCartCount();
+    };
+
     document.querySelectorAll('.star-rating').forEach(function (rating) {
       const stars = rating.querySelectorAll('.star');
       stars.forEach((star, index) => {
         star.addEventListener('click', () => {
-          // Fill the clicked star and all previous ones
           stars.forEach((s, i) => {
             s.classList.toggle('filled', i <= index);
           });
         });
       });
     });
-  </script>
-  
-  <script>
-    // Function to filter and highlight products based on the input as you type
-    document.querySelector('.search-bar input[type="text"]').addEventListener('input', function() {
-      const searchQuery = this.value.toLowerCase();
-  
-      // Get all product elements
-      const products = document.querySelectorAll('.product');
-  
-      // Loop through each product and check if it matches the search query
-      products.forEach(function(product) {
-        const productNameElement = product.querySelector('h4');
-        const productDescriptionElement = product.querySelector('p');
-  
-        const productName = productNameElement.textContent.toLowerCase();
-        const productDescription = productDescriptionElement.textContent.toLowerCase();
-  
-        // Reset the product display and remove previous highlights
-        product.style.display = 'inline-block'; // Show the product by default
-        productNameElement.innerHTML = product.querySelector('h4').textContent;
-        productDescriptionElement.innerHTML = product.querySelector('p').textContent;
-  
-        // Check if the search query exists in the product name or description
-        let isMatched = false;
-  
-        // Highlight in product name
-        if (productName.includes(searchQuery)) {
-          isMatched = true;
-          const highlightedName = productName.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
-          productNameElement.innerHTML = highlightedName;
-        }
-  
-        // Highlight in product description
-        if (productDescription.includes(searchQuery)) {
-          isMatched = true;
-          const highlightedDescription = productDescription.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
-          productDescriptionElement.innerHTML = highlightedDescription;
-        }
-  
-        // If no match, hide the product
-        if (!isMatched) {
-          product.style.display = 'none';
-        }
+
+    const searchInput = document.querySelector('.search-bar input[type="text"]');
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        const searchQuery = this.value.toLowerCase();
+        const products = document.querySelectorAll('.product');
+        products.forEach(function (product) {
+          const nameEl = product.querySelector('h4');
+          const descEl = product.querySelector('p');
+          const name = nameEl.textContent.toLowerCase();
+          const desc = descEl.textContent.toLowerCase();
+          product.style.display = 'inline-block';
+          nameEl.innerHTML = nameEl.textContent;
+          descEl.innerHTML = descEl.textContent;
+          let isMatched = false;
+          if (name.includes(searchQuery)) {
+            isMatched = true;
+            const highlighted = name.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
+            nameEl.innerHTML = highlighted;
+          }
+          if (desc.includes(searchQuery)) {
+            isMatched = true;
+            const highlighted = desc.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
+            descEl.innerHTML = highlighted;
+          }
+          if (!isMatched) {
+            product.style.display = 'none';
+          }
+        });
       });
-    });
+    }
   </script>
- 
-
-<script>
-  // Function to update the cart count
-// Function to update the cart count
-// Function to update the cart count
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  // Get the total quantity of items in the cart
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-  
-  // If there are no items, set the cart count to an empty string, otherwise show the quantity
-  document.getElementById('cart-counter').textContent = cartCount > 0 ? cartCount : '';
-}
-
-
-
-// Call this function whenever you add an item to the cart
-// Function to add an item to the cart
-function addToCart(name, price) {
-  // Get the cart from localStorage, or initialize an empty array if not found
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  // Check if the item already exists in the cart
-  const existingItemIndex = cart.findIndex(item => item.name === name);
-
-  if (existingItemIndex !== -1) {
-    // If the item exists, increase its quantity by 1
-    cart[existingItemIndex].quantity += 1;
-  } else {
-    // Otherwise, add a new item with a quantity of 1
-    cart.push({ name, price, quantity: 1 });
-  }
-
-  // Save the updated cart to localStorage
-  localStorage.setItem('cart', JSON.stringify(cart));
-
-  // Update the cart count
-  updateCartCount();
-}
-// Initialize the cart count on page load
-window.onload = function() {
-  updateCartCount();
-};
-</script>
 </body>
 </html>
