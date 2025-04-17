@@ -154,116 +154,73 @@
   </footer>
 
   <!-- Place this inside your <script> tag at the bottom of products.html -->
-<script>
-  function openCart() {
-    window.location.href = "cart.html";
-  }
-
-  fetch('https://mojehadmin.wuaze.com/get_products.php')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not OK');
-      }
-      return response.json();
-    })
-    .then(data => {
-      const productList = document.getElementById('product-list');
-      productList.innerHTML = ''; // Clear old content if needed
-
-      if (data.length === 0) {
-        productList.innerHTML = '<p>No products available right now.</p>';
-        return;
-      }
-
-      data.forEach(product => {
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('product');
-        productDiv.innerHTML = `
-          <img src="https://mojehadmin.wuaze.com/uploads/${product.image}" alt="${product.name}">
-          <h4>${product.name}</h4>
-          <h5>${product.description}</h5>
-          <h4>Price: Kshs ${product.price}</h4>
-          <div class="star-rating">
-            <span class="star filled">★</span>
-            <span class="star filled">★</span>
-            <span class="star filled">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-          </div>
-          <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
-        `;
-        productList.appendChild(productDiv);
-      });
-    })
-    .catch(error => {
-      console.error('Error fetching products:', error);
-      const productList = document.getElementById('product-list');
-      productList.innerHTML = '<p style="color:red;">Failed to load products. Please try again later.</p>';
-    });
-
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById('cart-counter').textContent = cartCount > 0 ? cartCount : '';
-  }
-
-  function addToCart(name, price) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existingItemIndex = cart.findIndex(item => item.name === name);
-    if (existingItemIndex !== -1) {
-      cart[existingItemIndex].quantity += 1;
-    } else {
-      cart.push({ name, price, quantity: 1 });
+ <script>
+    // Function to open the cart page
+    function openCart() {
+      window.location.href = "cart.html";
     }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-  }
 
-  window.onload = function () {
-    updateCartCount();
-  };
-
-  document.querySelectorAll('.star-rating').forEach(function (rating) {
-    const stars = rating.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-      star.addEventListener('click', () => {
-        stars.forEach((s, i) => {
-          s.classList.toggle('filled', i <= index);
+    // Fetch products from the PHP script
+    fetch('https://mojehadmin.wuaze.com/get_products.php')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const productList = document.getElementById('product-list');
+        // Loop through each product in the data
+        data.forEach(product => {
+          const productDiv = document.createElement('div');
+          productDiv.classList.add('product');
+          productDiv.innerHTML = `
+            <img src="https://mojehadmin.wuaze.com/uploads/${product.image}" alt="${product.name}">
+            <h4>${product.name}</h4>
+            <h5>${product.description}</h5>
+            <h4>Price: Kshs ${product.price}</h4>
+            <div class="star-rating">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+          `;
+          productList.appendChild(productDiv);
         });
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '<p>Failed to load products. Please try again later.</p>';
       });
-    });
-  });
 
-  const searchInput = document.querySelector('.search-bar input[type="text"]');
-  if (searchInput) {
-    searchInput.addEventListener('input', function () {
-      const searchQuery = this.value.toLowerCase();
-      const products = document.querySelectorAll('.product');
-      products.forEach(function (product) {
-        const nameEl = product.querySelector('h4');
-        const descEl = product.querySelector('p');
-        const name = nameEl.textContent.toLowerCase();
-        const desc = descEl.textContent.toLowerCase();
-        product.style.display = 'inline-block';
-        nameEl.innerHTML = nameEl.textContent;
-        descEl.innerHTML = descEl.textContent;
-        let isMatched = false;
-        if (name.includes(searchQuery)) {
-          isMatched = true;
-          const highlighted = name.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
-          nameEl.innerHTML = highlighted;
-        }
-        if (desc.includes(searchQuery)) {
-          isMatched = true;
-          const highlighted = desc.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
-          descEl.innerHTML = highlighted;
-        }
-        if (!isMatched) {
-          product.style.display = 'none';
-        }
-      });
-    });
-  }
-</script>
+    // Function to update the cart count from localStorage
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-counter').textContent = cartCount > 0 ? cartCount : '';
+    }
+
+    // Add a product to the cart
+    function addToCart(name, price) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItemIndex = cart.findIndex(item => item.name === name);
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    // Update the cart count on page load
+    window.onload = function() {
+      updateCartCount();
+    };
+  </script>
 </body>
 </html>
