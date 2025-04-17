@@ -542,9 +542,9 @@ h5 {
           
           <!-- Buy Now Button -->
           <button onclick="addToCart('HP Pavilion Aero 13 AMD Ryzen', 59599)">Add to Cart</button>
-      </div>  
+      </div> 
+    <div id="product-container"></div>
   </main>
-    <div id="product-list"></div>
   <footer>
     <p><center>JECFAM TECH SOLUTIONS</center></p>
   </footer>
@@ -654,39 +654,41 @@ window.onload = function() {
   updateCartCount();
 };
 </script>
- <script>
-    const apiUrl = "https://mojehadmin.wuaze.com/get_products.php";
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("https://mojehadmin.wuaze.com/get_products.php")
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("product-container");
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(products => {
-            const productListElement = document.getElementById('product-list');
+        data.forEach(product => {
+          const productDiv = document.createElement("div");
+          productDiv.className = "product";
 
-            products.forEach(product => {
-                const productItem = document.createElement('div');
-                productItem.className = 'product-item';
+          productDiv.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h4>${product.name}</h4>
+            <h5>${product.description}</h5>
+            <h4>Price: kshs ${Number(product.price).toLocaleString()}</h4>
+            <div class="star-rating">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+          `;
 
-                productItem.innerHTML = `
-                    <h3>${product.name}</h3>
-                    <p>Price: KSH ${product.price}</p>
-                    <p>${product.description}</p>
-                    <button onclick="addToCart(${product.id})">Add to Cart</button>
-                `;
-
-                productListElement.appendChild(productItem);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
+          container.appendChild(productDiv);
         });
-
-    function addToCart(productId) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(productId);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert('Product added to cart!');
-    }
+      })
+      .catch(error => {
+        console.error("Failed to fetch products:", error);
+      });
+  });
 </script>
+
 </body>
 </html>
     
