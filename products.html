@@ -13,33 +13,7 @@
         <span id="cart-counter" class="cart-counter">0</span>
       </div>
     <body>
-        <!-- Your product content goes here -->
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-         <script>
-            // Simulate loading with a progress bar
-            let progress = 0;
-            const progressBar = document.getElementById('progressBar');
-            const content = document.querySelector('.content');
-    
-            const interval = setInterval(() => {
-                if (progress < 100) {
-                    progress += 10; // Increment progress
-                    progressBar.style.width = progress + '%'; // Update progress bar width
-                } else {
-                    clearInterval(interval); // Stop the interval
-                    setTimeout(() => {
-                        progressBar.parentElement.style.display = 'none'; // Hide progress bar
-                        content.style.display = 'block'; // Show content
-                        mainContent.style.display = 'block';
-                    }, 500); // Short delay before showing content
-                }
-            }, 300); // Adjust loading speed (300ms per increment)
-        </script>
-        <!-- Your product content goes here -->
-    
-    <script>
+  <script>
         // Function to open the cart page
 function openCart() {
   window.location.href = "cart.html"; // Redirect to the cart page
@@ -56,9 +30,13 @@ body {
   background-size: cover;
   border-radius: 50px;
 }
+.fa {
+  color: #f39c12;
+}
 .container {
   width: 100%;
   margin: 10px;
+  padding: 30px;
   border-radius: 50px;
 }
 h4 {
@@ -136,16 +114,14 @@ main {
 .product {
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 20px;
-  text-align: center; /* Center-align content */
+  padding: 5px;
+  justify-content: space-between;
+  height: 100%;
+   display: flex;
+  flex-direction: column;
+  text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  justify-content: space-between; /* Distribute items evenly */
-  height: 90%; /* Make all product cards the same height */
-  
 }
 .product h4 {
   font-size: 1.2rem;
@@ -160,12 +136,14 @@ main {
 }
 
 .product img {
-  width: 100%; /* Keep full width for uniformity */
-  height: auto; /* Maintain aspect ratio */
+  width: 100%;
+  height: 268px; /* Fixed height for all images */
+  object-fit: cover;
   border-radius: 5px;
   margin-bottom: 10px;
   transition: transform 0.9s, box-shadow 0.9s;
 }
+
 
 
 .product h3 {
@@ -180,11 +158,7 @@ main {
   -webkit-box-orient: vertical;
   font-size: 15px;
 }
-.image-container img:last-child {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #a32d2d; /* Accent color for price */
-}
+
 .highlight {
   background-color: yellow;
   font-weight: bold;
@@ -229,6 +203,36 @@ h5 {
   font-size: 15px;
   font-weight: 100;
 }
+@media (max-width: 600px) {
+  .product img {
+    height: 240px; /* smaller height for mobile screens */
+    margin-left: 0px;
+  }
+
+  .product {
+    padding: 3px;
+  }
+
+  .product h4, .product h5 {
+    font-size: 0.95rem;
+  }
+
+  .product button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .star {
+    font-size: 16px;
+  }
+
+  main {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    padding: 10px;
+    gap: 10px;
+  }
+}
+
 </style>
 <body>
   <header>  
@@ -237,6 +241,7 @@ h5 {
         <a href="services.html">Services</a>
         <a href="products.html">Products</a>
         <a href="contact.html">Contact</a>
+        </a>
     </div>
      
   </header>
@@ -674,5 +679,7 @@ window.onload = function() {
 };
 </script>
 </body>
+
+
 </html>
     
