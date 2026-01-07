@@ -1,685 +1,1010 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="jec.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>Jecfam products</title>
-    <div style="position: relative;">
-        <img src="shopping-bag.png" alt="Cart" class="cart-image" onclick="openCart()">
-        <span id="cart-counter" class="cart-counter">0</span>
-      </div>
-    <body>
-  <script>
-        // Function to open the cart page
-function openCart() {
-  window.location.href = "cart.html"; // Redirect to the cart page
-}
-    </script>
-  </header>
-</head>
-<style>
-body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: white;
-  background-size: cover;
-  border-radius: 50px;
-}
-.fa {
-  color: #f39c12;
-}
-.container {
-  width: 100%;
-  margin: 10px;
-  padding: 30px;
-  border-radius: 50px;
-}
-h4 {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-style: normal;
-}
-header {
-  background-image: none;
-  padding: -5px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
-.cart-image {
-    position: fixed;
-            top: 11px; /* Adjust the top position as needed */
-            padding: none;
-            right: 5px; /* Adjust the left position as needed */
-            width: 40px; /* Adjust the width as needed */
-            height: auto;
-            cursor: pointer;
-            border-radius: 100px;
-            background-color: rgba(128, 128, 128, 0);
-            
-}
-.cart-counter {
-  
-            position: fixed;
-            top: 1px;
-            right: 5px;
-            background-color: rgba(128, 128, 128, 0);
-            color: rgb(228, 25, 25);
-            border-radius: 100%;
-            padding: 5px 10px;
-            font-size: 10px;
-            width: 1px;
-            
-}
-header h1 {
-  margin: 0;
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-nav {
-    display: flex;
-    align-items: center;
-    overflow: show;
-    padding: 15px;
-    justify-content: center;
-}
-.topnav {
-    display: flex;
-    align-items: center;
-    overflow: show;
-    padding: 15px;
-    justify-content: center;
-}
-.topnav a {
-    float: left;
-    display: block;
-    color: #38361f;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 16px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
-    font-weight: 900;
-}
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-.product {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 5px;
-  justify-content: space-between;
-  height: 100%;
-   display: flex;
-  flex-direction: column;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-.product h4 {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-  color: #333;
-}
-.product h4, .product p {
-  margin: 5px 0; /* Consistent spacing between elements */
-}
-.product img:hover {
-    transform: scale(1.1);
-}
-
-.product img {
-  width: 100%;
-  height: 268px; /* Fixed height for all images */
-  object-fit: cover;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  transition: transform 0.9s, box-shadow 0.9s;
-}
-
-
-
-.product h3 {
-  margin: 10px 0; /* Add margin above and below the product name */
-}
-
-.product p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limit to 3 lines */
-  -webkit-box-orient: vertical;
-  font-size: 15px;
-}
-
-.highlight {
-  background-color: yellow;
-  font-weight: bold;
-  color: red;
-}
-.product button {
-  margin-top: 10px; /* Add space above the button */
-  padding: 10px 15px; /* Add padding for better usability */
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem; /* Adjust button text size */
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.product button:hover {
-  background-color: #232050; /* Darker blue on hover */
-}
-.star-rating {
-  margin: 10px 0; /* Add spacing around the stars */
-  display: flex;
-  justify-content: center; /* Center-align the stars */
-}
-
-.star {
-  font-size: 20px; /* Adjust star size */
-  color: gray; /* Color for empty stars */
-  margin: 0 2px; /* Spacing between stars */
-  cursor: pointer; /* Pointer cursor for interactivity */
-}
-
-.star.filled {
-  color: gold; /* Color for filled stars */
-}
-.topnav a:hover {
-            color: #f39c12;
-        }
-h5 {
-  font-size: 15px;
-  font-weight: 100;
-}
-@media (max-width: 600px) {
-  .product img {
-    height: 240px; /* smaller height for mobile screens */
-    margin-left: 0px;
-  }
-
-  .product {
-    padding: 3px;
-  }
-
-  .product h4, .product h5 {
-    font-size: 0.95rem;
-  }
-
-  .product button {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
-
-  .star {
-    font-size: 16px;
-  }
-
-  main {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    padding: 10px;
-    gap: 10px;
-  }
-}
-
-</style>
-<body>
-  <header>  
-      <div class="topnav" id="myTopnav">
-        <a href="home.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="products.html">Products</a>
-        <a href="contact.html">Contact</a>
-        </a>
-    </div>
-     
-  </header>
-  <main>
-    <!-- Product Example -->
-<div class="product">
-  <img src="camon16 premier.png" alt="Product 1">
-  <h4>Camon 16 premier</h4>
-  <h5>8GB RAM/256GB ROM</h5>
-  <h4>Price: kshs 27, 899</h4>
-   <!-- Star Rating -->
-   <div class="star-rating">
-    <span class="star filled">★</span>
-    <span class="star filled">★</span>
-    <span class="star filled">★</span>
-    <span class="star">★</span>
-    <span class="star">★</span>
-   </div>
-  <!-- Buy Now Button -->
-  <button onclick="addToCart('Camon 16 premier', 27899)">Add to Cart</button>
-</div>
-
-    </div>
-    <div class="product">
-      <img src="samsung A04s.png" alt="Product 1">
-      <h4>Samsung A04s</h4>
-      <h5>6GB RAM/128GB ROM</h5>
-       <h4>Price: kshs 15,750</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Samsung A04s', 15750)">Add to Cart</button>
-    </div>  
-    <div class="product">
-      <img src="samsung galaxy A23.png" alt="Product 1">
-      <h4>Samsung Galaxy A23</h4>
-      <h5>6GB RAM/128GB ROM</h5>
-       <h4>Price: kshs 23,650</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Samsung Galaxy A23', 23650)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="samsung galaxy s21.png" alt="Product 1">
-      <h4>Samsung galaxy s21</h4>
-      <h5>6GB RAM/128GB ROM</h5>
-       <h4>Price: ksh35,500</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Samsung galaxy s21', 35500)">Add to Cart</button>
-    </div>  
-    <div class="product">
-      <img src="samsung s10.png" alt="Product 1">
-      <h4>Samsung Galaxy S10</h4>
-      <h5>4gb RAM/ 128GB ROM</h5>
-       <h4>Price: kshs 33, 499</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Samsung Galaxy S10', 33499)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="Canon EOS 2000D DSLR Camera 1-550x550.jpg" alt="Product 1">
-      <h4>Canon Camera</h4>
-      <h5>Canon EOS 2000D DSLR</h5>
-       <h4>Price: kshs 53,499</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Canon Camera', 53499)">Add to Cart</button>
-    </div>  
-    <div class="product">
-      <img src="iPhone-13.jpg" alt="Product 1">
-      <h4>Iphone 13</h4>
-      <h5>8GB RAM/128GB</h5>
-       <h4>Price: kshs 98,899</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Iphone 13', 98899)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="oppo a98 5g.png" alt="Product 1">
-      <h4>OPPO A98 5G</h4>
-      <h5>8GB RAM/256GB ROM</h5>
-       <h4>Price: kshs 34,599</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('OPPO A98 5G', 34599)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="Vodafone_Smart_V10_.webp" alt="Product 1">
-      <h4>Vodafone smart v10</h4>
-      <h5>3GB RAM/32GB ROM</h5>
-       <h4>Price: kshs 22,599</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Vodafone smart v10', 22599)">Add to Cart</button>
-    </div>  
-    <div class="product">
-      <img src="realme c30s.png" alt="Product 1">
-      <h4>Realme c30s</h4>
-      <h5>34GB RAM/256GB ROM</h5>
-       <h4>Price: kshs 11,799</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Realme c30s', 11799)">Add to Cart</button>
-    </div>  
-    <div class="product">
-      <img src="realme c65.png" alt="Product 1">
-      <h4>Realme C65</h4>
-      <h5>8GB RAM/ 256GB ROM</h5>
-       <h4>Price: kshs 21,499</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Realme C65', 21499)">Add to Cart</button>
-    </div>  
-    <div class="product">
-      <img src="realme c67 5g.png" alt="Product 1">
-      <h4>Realme C67</h4>
-      <p>8GB RAM/256GB ROM</p>
-       <h4>Price: kshs 22,599</h4>
-       <div class="star-rating">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-       </div>
-        
-        <!-- Buy Now Button -->
-        <button onclick="addToCart('Realme C67', 22599)">Add to Cart</button>
-    </div>  
-    <div class="product">
-        <img src="realme10.png" alt="Product 1">
-        <h4>Realme 10</h4>
-        <h5>8GB RAM/256GB ROM</h5>
-         <h4>Price: kshs 24,699</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('Realme 10', 24699)">Add to Cart</button>
-      </div>  
-      <div class="product">
-        <img src="Tecno-Camon-30.jpg" alt="Product 1">
-        <h4>Tecno-Camon-30</h4>
-        <h5>8GB RAM/256GB ROM</h5>
-         <h4>Price: kshs 28,499</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('Tecno-Camon-30', 28499)">Add to Cart</button>
-      </div>  
-      <div class="product">
-        <img src="phantomX2.png" alt="Product 1">
-        <h4>PhantomX2</h4>
-        <h5>8GB RAM/256GB RAM</h5>
-         <h4>Price: kshs 49,499</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('PhantomX2', 49499)">Add to Cart</button>
-      </div>  
-      <div class="product">
-        <img src="lenovo ideapad.jpg" alt="Product 1">
-        <h4>lenovo IdeaPad 3 core i5</h4>
-        <p>8GB RAM/1TB HDD</p>
-         <h4>Price: kshs 34,599</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('Lenovo ideapad 3', 34599)">Add to Cart</button>
-      </div>  
-      <div class="product">
-        <img src="HP-EliteBook-820-G3-2.jpg" alt="Product 1">
-        <h4>HP Elitebook 820 g3 core i5 6th gen</h4>
-         <p>8GB RAM/256GB SSD</p>
-         <h4>Price: kshs 18,599</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('HP Elitebook 820 g3', 18599)">Add to Cart</button>
-      </div>  
-      <div class="product">
-        <img src="elitebook840g5.png" alt="Product 1">
-        <h4>HP elitebook 840 g5 core i5 8th gen</h4>
-         <h5>8GB RAM/256GB SSD</h5>
-         <h4>Price: kshs 31,499</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('HP elitebook 840 g5', 31499)">Add to Cart</button>
-      </div>  
-      <div class="product">
-        <img src="notebook240.png" alt="Product 1">
-        <h4>HP 240 G9 notebook PC</h4>
-         <h5>8GB RAM/ 512GB SSD</h5>
-         <h4>Price: kshs 48,999</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('HP 240 G9 notebook PC', 48999)">Add to Cart</button>
-      </div>  
-      <div class="product">
-        <img src="pavilion13.3.png" alt="Product 1">
-        <h4>HP Pavilion Aero 13 AMD Ryzen</h4>
-         <h5>16GB RAM/512GB SSD</h5>
-         <h4>Price: kshs 59,599</h4>
-         <div class="star-rating">
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star filled">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-         </div>
-          
-          <!-- Buy Now Button -->
-          <button onclick="addToCart('HP Pavilion Aero 13 AMD Ryzen', 59599)">Add to Cart</button>
-      </div>  
-  </main>
-  <footer>
-    <p><center>JECFAM TECH SOLUTIONS</center></p>
-  </footer>
-  <script>
-    // Add click event listeners to the stars
-    document.querySelectorAll('.star-rating').forEach(function (rating) {
-      const stars = rating.querySelectorAll('.star');
-      stars.forEach((star, index) => {
-        star.addEventListener('click', () => {
-          // Fill the clicked star and all previous ones
-          stars.forEach((s, i) => {
-            s.classList.toggle('filled', i <= index);
-          });
-        });
-      });
-    });
-  </script>
-  
-  <script>
-    // Function to filter and highlight products based on the input as you type
-    document.querySelector('.search-bar input[type="text"]').addEventListener('input', function() {
-      const searchQuery = this.value.toLowerCase();
-  
-      // Get all product elements
-      const products = document.querySelectorAll('.product');
-  
-      // Loop through each product and check if it matches the search query
-      products.forEach(function(product) {
-        const productNameElement = product.querySelector('h4');
-        const productDescriptionElement = product.querySelector('p');
-  
-        const productName = productNameElement.textContent.toLowerCase();
-        const productDescription = productDescriptionElement.textContent.toLowerCase();
-  
-        // Reset the product display and remove previous highlights
-        product.style.display = 'inline-block'; // Show the product by default
-        productNameElement.innerHTML = product.querySelector('h4').textContent;
-        productDescriptionElement.innerHTML = product.querySelector('p').textContent;
-  
-        // Check if the search query exists in the product name or description
-        let isMatched = false;
-  
-        // Highlight in product name
-        if (productName.includes(searchQuery)) {
-          isMatched = true;
-          const highlightedName = productName.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
-          productNameElement.innerHTML = highlightedName;
-        }
-  
-        // Highlight in product description
-        if (productDescription.includes(searchQuery)) {
-          isMatched = true;
-          const highlightedDescription = productDescription.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
-          productDescriptionElement.innerHTML = highlightedDescription;
-        }
-  
-        // If no match, hide the product
-        if (!isMatched) {
-          product.style.display = 'none';
-        }
-      });
-    });
-  </script>
- 
-
-<script>
-  // Function to update the cart count
-// Function to update the cart count
-// Function to update the cart count
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  // Get the total quantity of items in the cart
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-  
-  // If there are no items, set the cart count to an empty string, otherwise show the quantity
-  document.getElementById('cart-counter').textContent = cartCount > 0 ? cartCount : '';
-}
-
-
-
-// Call this function whenever you add an item to the cart
-// Function to add an item to the cart
-function addToCart(name, price) {
-  // Get the cart from localStorage, or initialize an empty array if not found
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  // Check if the item already exists in the cart
-  const existingItemIndex = cart.findIndex(item => item.name === name);
-
-  if (existingItemIndex !== -1) {
-    // If the item exists, increase its quantity by 1
-    cart[existingItemIndex].quantity += 1;
-  } else {
-    // Otherwise, add a new item with a quantity of 1
-    cart.push({ name, price, quantity: 1 });
-  }
-
-  // Save the updated cart to localStorage
-  localStorage.setItem('cart', JSON.stringify(cart));
-
-  // Update the cart count
-  updateCartCount();
-}
-// Initialize the cart count on page load
-window.onload = function() {
-  updateCartCount();
-};
-</script>
-</body>
-
-
-</html>
+    <title>Products - JECFAM Tech Solutions</title>
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #f39c12;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #666;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: #0d62d9;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Cart Icon */
+        .cart-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--secondary-color);
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search and Filter */
+        .products-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            background-color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .product-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-category {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            line-height: 1.4;
+        }
+
+        .product-specs {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .product-price span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .star-rating {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .star {
+            color: #ddd;
+            margin-right: 3px;
+            font-size: 1.1rem;
+        }
+
+        .star.filled {
+            color: #ffc107;
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #0d62d9;
+        }
+
+        .add-to-cart-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Highlight effect for search */
+        .highlight {
+            background-color: rgba(255, 235, 59, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .products-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .filter-options {
+                justify-content: space-between;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>JEC<span>FAM</span></h1>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="cart-container" onclick="openCart()">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span id="cart-counter" class="cart-counter"></span>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p>Discover our premium collection of smartphones, laptops, and tech accessories. Quality devices at competitive prices.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <div class="container">
+        <!-- Search and Filter Controls -->
+        <div class="products-controls">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search products...">
+            </div>
+            
+            <div class="filter-options">
+                <select class="filter-select" id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="phone">Smartphones</option>
+                    <option value="laptop">Laptops</option>
+                    <option value="camera">Cameras</option>
+                </select>
+                
+                <select class="filter-select" id="priceFilter">
+                    <option value="all">All Prices</option>
+                    <option value="low">Under Ksh 20,000</option>
+                    <option value="medium">Ksh 20,000 - 40,000</option>
+                    <option value="high">Over Ksh 40,000</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Product cards will be dynamically populated -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">JEC<span>FAM</span></div>
+            <p>Rewiring Possibilities, Restoring Performance</p>
+            <p class="copyright">&copy; 2023 JECFAM Tech Solutions. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Product data
+        const products = [
+            {
+                id: 1,
+                name: "Camon 16 Premier",
+                category: "phone",
+                specs: "8GB RAM/256GB ROM",
+                price: 27899,
+                image: "camon16 premier.png",
+                rating: 3
+            },
+            {
+                id: 2,
+                name: "Samsung A04s",
+                category: "phone",
+                specs: "6GB RAM/128GB ROM",
+                price: 15750,
+                image: "samsung A04s.png",
+                rating: 3
+            },
+            {
+                id: 3,
+                name: "Samsung Galaxy A23",
+                category: "phone",
+                specs: "6GB RAM/128GB ROM",
+                price: 23650,
+                image: "samsung galaxy A23.png",
+                rating: 3
+            },
+            {
+                id: 4,
+                name: "Samsung Galaxy S21",
+                category: "phone",
+                specs: "6GB RAM/128GB ROM",
+                price: 35500,
+                image: "samsung galaxy s21.png",
+                rating: 3
+            },
+            {
+                id: 5,
+                name: "Samsung Galaxy S10",
+                category: "phone",
+                specs: "4GB RAM/128GB ROM",
+                price: 33499,
+                image: "samsung s10.png",
+                rating: 3
+            },
+            {
+                id: 6,
+                name: "Canon Camera",
+                category: "camera",
+                specs: "Canon EOS 2000D DSLR",
+                price: 53499,
+                image: "Canon EOS 2000D DSLR Camera 1-550x550.jpg",
+                rating: 3
+            },
+            {
+                id: 7,
+                name: "iPhone 13",
+                category: "phone",
+                specs: "8GB RAM/128GB",
+                price: 98899,
+                image: "iPhone-13.jpg",
+                rating: 3
+            },
+            {
+                id: 8,
+                name: "OPPO A98 5G",
+                category: "phone",
+                specs: "8GB RAM/256GB ROM",
+                price: 34599,
+                image: "oppo a98 5g.png",
+                rating: 3
+            },
+            {
+                id: 9,
+                name: "Vodafone Smart V10",
+                category: "phone",
+                specs: "3GB RAM/32GB ROM",
+                price: 22599,
+                image: "Vodafone_Smart_V10_.webp",
+                rating: 3
+            },
+            {
+                id: 10,
+                name: "Realme C30s",
+                category: "phone",
+                specs: "4GB RAM/256GB ROM",
+                price: 11799,
+                image: "realme c30s.png",
+                rating: 3
+            },
+            {
+                id: 11,
+                name: "Realme C65",
+                category: "phone",
+                specs: "8GB RAM/256GB ROM",
+                price: 21499,
+                image: "realme c65.png",
+                rating: 3
+            },
+            {
+                id: 12,
+                name: "Realme C67",
+                category: "phone",
+                specs: "8GB RAM/256GB ROM",
+                price: 22599,
+                image: "realme c67 5g.png",
+                rating: 3
+            },
+            {
+                id: 13,
+                name: "Realme 10",
+                category: "phone",
+                specs: "8GB RAM/256GB ROM",
+                price: 24699,
+                image: "realme10.png",
+                rating: 3
+            },
+            {
+                id: 14,
+                name: "Tecno Camon 30",
+                category: "phone",
+                specs: "8GB RAM/256GB ROM",
+                price: 28499,
+                image: "Tecno-Camon-30.jpg",
+                rating: 3
+            },
+            {
+                id: 15,
+                name: "Phantom X2",
+                category: "phone",
+                specs: "8GB RAM/256GB ROM",
+                price: 49499,
+                image: "phantomX2.png",
+                rating: 3
+            },
+            {
+                id: 16,
+                name: "Lenovo IdeaPad 3",
+                category: "laptop",
+                specs: "Core i5, 8GB RAM/1TB HDD",
+                price: 34599,
+                image: "lenovo ideapad.jpg",
+                rating: 3
+            },
+            {
+                id: 17,
+                name: "HP Elitebook 820 G3",
+                category: "laptop",
+                specs: "Core i5 6th Gen, 8GB RAM/256GB SSD",
+                price: 18599,
+                image: "HP-EliteBook-820-G3-2.jpg",
+                rating: 3
+            },
+            {
+                id: 18,
+                name: "HP Elitebook 840 G5",
+                category: "laptop",
+                specs: "Core i5 8th Gen, 8GB RAM/256GB SSD",
+                price: 31499,
+                image: "elitebook840g5.png",
+                rating: 3
+            },
+            {
+                id: 19,
+                name: "HP 240 G9 Notebook",
+                category: "laptop",
+                specs: "8GB RAM/512GB SSD",
+                price: 48999,
+                image: "notebook240.png",
+                rating: 3
+            },
+            {
+                id: 20,
+                name: "HP Pavilion Aero 13",
+                category: "laptop",
+                specs: "AMD Ryzen, 16GB RAM/512GB SSD",
+                price: 59599,
+                image: "pavilion13.3.png",
+                rating: 3
+            }
+        ];
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            renderProducts(products);
+            setupEventListeners();
+            setupMobileMenu();
+        });
+
+        // Render products to the grid
+        function renderProducts(productsArray) {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            if (productsArray.length === 0) {
+                productsGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>No Products Found</h3>
+                        <p>Try adjusting your search or filter to find what you're looking for.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            productsArray.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                // Create star rating HTML
+                let starsHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    starsHTML += `<span class="star ${i <= product.rating ? 'filled' : ''}">★</span>`;
+                }
+                
+                // Format price with commas
+                const formattedPrice = product.price.toLocaleString();
+                
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x220?text=Product+Image'">
+                        <div class="product-badge">${getCategoryLabel(product.category)}</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-category">${getCategoryLabel(product.category)}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-specs">${product.specs}</p>
+                        <div class="product-price">Ksh ${formattedPrice}</div>
+                        <div class="star-rating">
+                            ${starsHTML}
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price})">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Get category label
+        function getCategoryLabel(category) {
+            const labels = {
+                'phone': 'Smartphone',
+                'laptop': 'Laptop',
+                'camera': 'Camera'
+            };
+            return labels[category] || 'Product';
+        }
+
+        // Filter and search functionality
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const priceRange = document.getElementById('priceFilter').value;
+            
+            let filteredProducts = products.filter(product => {
+                // Search filter
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                                     product.specs.toLowerCase().includes(searchTerm);
+                
+                // Category filter
+                const matchesCategory = category === 'all' || product.category === category;
+                
+                // Price filter
+                let matchesPrice = true;
+                if (priceRange === 'low') {
+                    matchesPrice = product.price < 20000;
+                } else if (priceRange === 'medium') {
+                    matchesPrice = product.price >= 20000 && product.price <= 40000;
+                } else if (priceRange === 'high') {
+                    matchesPrice = product.price > 40000;
+                }
+                
+                return matchesSearch && matchesCategory && matchesPrice;
+            });
+            
+            // Highlight search terms in product names
+            if (searchTerm) {
+                filteredProducts = filteredProducts.map(product => {
+                    return {
+                        ...product,
+                        name: product.name.replace(new RegExp(searchTerm, 'gi'), match => `<span class="highlight">${match}</span>`)
+                    };
+                });
+            }
+            
+            renderProducts(filteredProducts);
+        }
+
+        // Setup event listeners for search and filters
+        function setupEventListeners() {
+            document.getElementById('searchInput').addEventListener('input', filterProducts);
+            document.getElementById('categoryFilter').addEventListener('change', filterProducts);
+            document.getElementById('priceFilter').addEventListener('change', filterProducts);
+        }
+
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
+
+        // Cart functions (preserved from original code)
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-counter').textContent = cartCount > 0 ? cartCount : '';
+        }
+
+        function addToCart(name, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.name === name);
+
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show feedback to user
+            showAddToCartFeedback(name);
+        }
+
+        function openCart() {
+            window.location.href = "cart.html";
+        }
+
+        function showAddToCartFeedback(productName) {
+            // Create a temporary notification
+            const feedback = document.createElement('div');
+            feedback.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background-color: var(--primary-color);
+                color: white;
+                padding: 15px 25px;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            feedback.innerHTML = `<i class="fas fa-check-circle"></i> ${productName} added to cart!`;
+            
+            document.body.appendChild(feedback);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                feedback.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(feedback);
+                }, 300);
+            }, 3000);
+            
+            // Add animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>
