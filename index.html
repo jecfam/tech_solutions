@@ -76,12 +76,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-.logo-slider img {
-            height: 170px;
-            filter: saturate(1);
-            transition: var(--transition);
-            object-fit: contain;
-        }
+
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
@@ -478,11 +473,13 @@
             padding: var(--space-lg) 0;
         }
 
+        /* LOGO SIZE FIX - Desktop size */
         .logo-slider img {
             height: 170px;
             filter: saturate(1);
             transition: var(--transition);
             object-fit: contain;
+            width: auto;
         }
 
         .logo-slider img:hover {
@@ -820,6 +817,11 @@
             .hero .tagline {
                 font-size: var(--text-lg);
             }
+            
+            /* Medium screens logo size */
+            .logo-slider img {
+                height: 140px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -892,6 +894,15 @@
                 font-size: var(--text-base);
             }
             
+            /* Tablet logo size - Increased to 100px */
+            .logo-slider img {
+                height: 100px;
+            }
+            
+            .logo-slider {
+                gap: var(--space-xl);
+            }
+            
             .about-grid {
                 grid-template-columns: 1fr;
                 gap: var(--space-xl);
@@ -920,6 +931,18 @@
             }
         }
 
+        @media (max-width: 576px) {
+            /* Mobile logo size - Even larger on phones */
+            .logo-slider img {
+                height: 120px !important; /* Force larger size on phones */
+            }
+            
+            .logo-slider {
+                gap: var(--space-lg);
+                padding: var(--space-md) 0;
+            }
+        }
+
         @media (max-width: 480px) {
             .hero {
                 padding: 100px 0 40px;
@@ -933,8 +956,13 @@
                 font-size: var(--text-base);
             }
             
+            /* Small phone logo size - Still large */
             .logo-slider img {
-                height: 40px;
+                height: 110px !important;
+            }
+            
+            .logo-slider {
+                gap: var(--space-md);
             }
             
             .service-card {
@@ -949,6 +977,13 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            /* Extra small phones */
+            .logo-slider img {
+                height: 100px !important;
             }
         }
 
@@ -1404,7 +1439,3 @@
     </script>
 </body>
 </html>
-
-
-
-
